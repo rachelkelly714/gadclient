@@ -1,8 +1,8 @@
-let server: string; 
+let Datab: string; 
 
-server = "http://localhost:5005"; 
-
-
+Datab = "http://localhost:5005"; 
 
 
-export default server; 
+
+
+export default Datab; 

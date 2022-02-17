@@ -1,19 +1,15 @@
 import React from 'react';
-import server from '../helpers/DB'
+import Datab from '../helpers/DB'
 
 
 
 
-export interface (props){
+
+const Register = () => {
+
     return (
         <div></div>
     )
-}
+  }
 
-const Register = (props: ) => 
-{
-return (
-    <div></div>
-)
-
-}
+  export default Register; 

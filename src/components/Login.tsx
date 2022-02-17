@@ -1,5 +1,6 @@
 import React from 'react'; 
-import server from '../helpers/DB';
+import Datab from '../helpers/DB';
+import {Flytoken, Usercred, Admincred, Admintoken, Serverfetch, SetPropsUser} from './Interfaces'
 
 
 
@@ -9,7 +10,9 @@ import server from '../helpers/DB';
 
 
 
-const Login = (props) =>
+
+
+const Login = () =>
 {
 
     return (
@@ -25,7 +28,6 @@ const Login = (props) =>
 
 
 
-import server from '../helpers/DB'
 
 
 
