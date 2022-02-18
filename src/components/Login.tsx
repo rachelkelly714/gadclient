@@ -1,4 +1,6 @@
-import { Component } from "react";
+import { Component, useState, useEffect } from "react";
+
+
 import {
   Form,
   Container,
@@ -31,8 +33,8 @@ type Varlogin = {
   username: string;
   password: string;
   emailAddress: string;
-  name?: string; 
-  value: string; 
+  usernameValid: boolean; 
+  passwordValid: boolean;  
 };
 
 class Login extends Component<Propslogin, Varlogin> {
@@ -42,6 +44,8 @@ class Login extends Component<Propslogin, Varlogin> {
       username: "",
       password: "",
       emailAddress: "",
+      usernameValid: true, 
+      passwordValid: true, 
      
     };
   }
@@ -71,57 +75,83 @@ class Login extends Component<Propslogin, Varlogin> {
       });
   };
 
- handleUserInput= (e: React.FormEvent) => {
-    e.preventDefault();  
 
 
- }
+
+
 
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          
+         <h1>Login</h1>
+        <Container
+         style={{
+           backgroundColor: '#211F26',
+           width: '30%',
+           paddingLeft: 200,
+           paddingRight: 0, 
+           paddingTop: 100, 
+           paddingBottom: 30, 
+           border: '3px solid lightGray', 
+           boxShadow: '30px', 
+           alignItems: 'center'
+
+          }} 
+         >
+        <Form 
+        className="space-y-3 bg-gray-700" 
+        onSubmit={this.handleSubmit}
+       >
+          <Row >
+            <Col xs={5}>
           <FormGroup>
-            <Label for="exampleUsername">Username</Label>
+            <Label for="exampleUsername" style={{color: '#5176FA'}}>Username</Label>
             <Input
+             
               id="exampleUsername"
               name="username"
-              placeholder="Username *"
+              placeholder="Username*"
+              className='width-50px border-3 focus:border-lightgray-200 bsSize:sm'
+              
+        
       
               />
               </FormGroup>
-          
+              </Col>
+              </Row>
+              <Row>
+            <Col xs={5}>
           <FormGroup>
-            <Label for="exampleEmail">Email</Label>
+            <Label for="exampleEmail" style={{color: '#5176FA'}}>Email</Label>
             <Input
               id="exampleEmail"
               name="email"
               placeholder="Email Address"
               type="email"
+              className='width-50px border-3 focus:border-lightgray-200 bsSize:sm'
             />
           </FormGroup>
+          </Col>
+          </Row>
+          <Row>
+          <Col xs={5}>
           <FormGroup>
-            <Label for="examplePassword">Password</Label>
+            <Label for="examplePassword"style={{color: '#5176FA'}} >Password</Label>
             <Input
               id="examplePassword"
               name="password"
               placeholder="Password *"
               type="password"
+              className='width-50px border-3 focus:border-lightgray-200 bsSize:sm'
             />
           </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Verify Password</Label>
-            <Input
-              id="examplePassword"
-              name="password"
-              placeholder="Verify Password *"
-              type="password"
-            />
-          </FormGroup>
-          <Button>Submit</Button>
-          <p>* Required</p>
+          </Col>
+          </Row>
+          <Button style = {{color:'black', backgroundColor: 'rgb(81,118,250)',}} >Submit</Button>
+          <p style = {{color: 'red', fontWeight: 'bold', paddingRight: '250px'}}   > * Required </p>
         </Form>
+        </Container>
+       
       </div>
     );
   }
