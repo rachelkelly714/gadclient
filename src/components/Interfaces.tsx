@@ -1,5 +1,5 @@
 import React , {useState} from 'react'; 
-import Datadb from '../helpers/DB'; 
+import datab from '../helpers/DB'; 
 
 
 export interface Flytoken {
@@ -27,7 +27,8 @@ export interface Flytoken {
    adminLoggedIn: boolean; 
    setAdminLoggedIn: (value: boolean) => void; 
    clearToken: () => void; 
-   sessionTokenA: (tokenA: string | null) => void; 
+   sessionTokenA: string | null; 
+   setSessionTokenA: (tokenA: string | null) => void; 
    updateToken: (newTokenA: string) => void; 
 
   }
@@ -73,7 +74,7 @@ export interface Flytoken {
   export interface Serverfetch {
     errorMessage: string; 
     setErrorMessage: (errorMessage: string) => void; 
-    fetchServer: () =>Promise<void>; 
+    fetchDatab: () =>Promise<void>; 
     responseCall: number; 
     setResponseCall: (responseCall: number) => void; 
   }
@@ -157,6 +158,9 @@ export const UseStates = () => {
 const[idp, setIdp] = useState<Philocred['idp']>(''); 
 const[rolep, setRolep] = useState<Philocred['rolep']>('Aristotle'); 
 const[emailPAdress, setEmailPAdress] = useState<Philocred['emailPAddress']>('' || null); 
+const[usernameP, setUsernameP] = useState<Philocred['usernameP']>(''); 
+const[sessionTokenP, setSessionTokenP] = useState <Philotoken['sessionTokenP']>(''); 
+const[philoLoggedIn, setPhiloLoggedIn] = useState<Philotoken['philoLoggedIn']>(false);
 
   
 
