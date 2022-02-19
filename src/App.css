@@ -1,7 +1,4 @@
 
-
-
-
 .App {
   text-align: center;
 }
@@ -19,8 +16,40 @@
   color: white;
 }
 
+.shadow-box {
+  height: 120px;
+  width: 100%;
+  background-color: #64b5f6;
+}
 
-.center-block {
-  margin: auto;
-  display: block;
+.Font {
+ font-family: 'Gabriela', serif;
+}
+
+.Login {
+  background-color: #282c34;
+  border: 2px solid #d3d3d3;
+  border-radius: .5em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding: 1em;
+  text-align: left;
+  width: 600px;
+  font-family: 'Gabriela', serif;
+  color:#64b5f6;
+  
+}
+
+.form {
+  padding: 1em;
+  background-color: '#211F26';
+  box-shadow: 15px, 15px rgb(173, 172, 172);
+}
+
+
+.btn {
+  background-color:#64b5f6; 
+  color: #282c34; 
 }

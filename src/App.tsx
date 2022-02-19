@@ -1,5 +1,5 @@
 import{Component, useEffect, useState} from "react";
-
+import "./index.css"
 import "./App.css";
 import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
@@ -231,15 +231,13 @@ render () {
     return (
     <>
     <div className= 'App'> 
+   <div><h1 className= 'Font'>Welcome!</h1></div>
     <Routes>
     <Route path='/users/login' element = {<Login  
       token={this.state.sessionToken}
       updateToken = {this.updateToken}
       role={this.state.role}
-      updateRole={this.updateRole}
-          
-      />
-    } />
+      updateRole={this.updateRole}/>}/>
         
 
     

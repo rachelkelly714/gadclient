@@ -1,22 +1,15 @@
+import React from 'react';
+import Datab from '../helpers/DB'
 
 
-const NavBar = () =>
-{
+
+
+
+const Navbar = () => {
 
     return (
-
         <div></div>
     )
+  }
 
-
-
-}
-
-
-
-
-
-
-
-
-export default NavBar; 
+  export default Navbar; 
