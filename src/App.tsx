@@ -3,7 +3,17 @@ import "./index.css"
 import "./App.css";
 import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
+import Register from "../src/components/Register";
+import Topics from "../src/components/Topics"; 
+import Topicslist from "./components/Topicslist";
+import NotTS from './components/NotTS'
 
+export interface TopicsState {
+ 
+  topics: string;
+  fetchTopic: () =>Promise<any>
+
+}
 
 export interface Flytoken {
 
@@ -142,33 +152,6 @@ export interface SetPropsAdmin {
 }
 
 
-export const UseStates = () => {
-// ~~** User States **~~ //
-
-
-  const[id, setId] = useState<Usercred['id']>('');
-  const[role, setRole] = useState<Usercred['role']>('glaucon');
-  const[emailAddress, setEmailAddress] = useState<Usercred['emailAddress']>('' || null);
-  const[username, setUsername] = useState<Usercred['username']>('');
-  const[errorMessage, setErrorMessage] = useState<Serverfetch['errorMessage']>('');
-  const[responseCall, setResponseCall] = useState<Serverfetch['responseCall']>();
-  const[sessionToken, setSessionToken] = useState<Flytoken['sessionToken']>('');
-  const[userLoggedIn, setUserLoggedIn] = useState<Flytoken['userLoggedIn']>(false);
-  
-
-// ~~** Philo States **~~ // 
-
-const[idp, setIdp] = useState<Philocred['idp']>(''); 
-const[rolep, setRolep] = useState<Philocred['rolep']>('Aristotle'); 
-const[emailPAdress, setEmailPAdress] = useState<Philocred['emailPAddress']>('' || null); 
-const[usernameP, setUsernameP] = useState<Philocred['usernameP']>(''); 
-const[sessionTokenP, setSessionTokenP] = useState <Philotoken['sessionTokenP']>(''); 
-const[philoLoggedIn, setPhiloLoggedIn] = useState<Philotoken['philoLoggedIn']>(false);
-
-  
-
-
-}
 
 
 
@@ -178,10 +161,16 @@ type Tokens =
     role: string
 }
 
+type fetchProps = {
+  sessionToken: string
+  fetchTopic: () => Promise<any>
+}
 
 
 
-class App extends Component<{}, Tokens > {
+
+
+class App extends Component<{}, Tokens, fetchProps > {
     
     constructor(props: {} ){
         super(props); 
@@ -238,8 +227,23 @@ render () {
       updateToken = {this.updateToken}
       role={this.state.role}
       updateRole={this.updateRole}/>}/>
-        
 
+<Route path='/users/register' element = {<Register  
+      token={this.state.sessionToken}
+      updateToken = {this.updateToken}
+      role={this.state.role}
+      updateRole={this.updateRole}/>}/>
+        
+        <Route path ='/topics' element = {<Topics 
+        sessionToken={this.state.sessionToken}
+     />} /> 
+          
+          <Route path ='/topics/list' element = {<Topicslist 
+      
+     />} />
+
+     <Route path = '/notts' element = {<NotTS />}/>
+     
     
     
     
