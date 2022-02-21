@@ -144,3 +144,27 @@
   margin-top: 500px;
 
 }
+
+.Modaltopbox {
+  background-color: #ccd0d8;
+  border: .5px solid #1d1d1d;
+  border-radius: .5em;
+  text-align: left;
+  width: 100px; }
+
+  .Modalbottbox {
+    background-color: #ccd0d8;
+    border: .5px solid #1d1d1d;
+    border-radius: .5em;
+    text-align: left;
+    width:  450px;
+    height: 300px; }
+
+  .ModalHed {
+    background-color: #282c34;
+  border: .5px solid #1d1d1d;
+  border-radius: .5em;
+  text-align: left;
+  font: 'Gabriela', serif;
+  color: #64b5f6;
+  }

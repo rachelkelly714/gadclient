@@ -3,6 +3,10 @@ import datab from "../../helpers/DB";
 import "../../App.css";
 import { Form, FormGroup, Button, Input } from "reactstrap";
 import background from "../../assets/ethical.jpg";
+import {Route, Routes} from 'react-router-dom'; 
+import UpdateEthic from './EditEthics'
+import {editEthicsProps} from './EditEthics'
+import { updateEnumDeclaration } from "typescript";
 
 type ethicProps = {
   token: string;
@@ -16,7 +20,8 @@ export interface EthicState {
   postEntry: string;
 }
 
-class EthicPosts extends Component<ethicProps, EthicState> {
+
+  export default class EthicPosts extends Component<ethicProps, EthicState,  UpdateEthic > {
   constructor(props: ethicProps) {
     super(props);
     this.state = {
@@ -99,9 +104,10 @@ class EthicPosts extends Component<ethicProps, EthicState> {
             </Button>
         </div>
           </Form>
+         
       </div>
     );
   }
 }
 
-export default EthicPosts;
+

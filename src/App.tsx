@@ -4,11 +4,10 @@ import "./App.css";
 import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
 import Register from "../src/components/Register";
-import Topics from "../src/components/Topics"; 
-import Topicslist from "./components/Topicslist";
-import RealityPosts from "./components/Posts/Reality";
-import EthicPosts from "./components/Posts/Ethics";
-import FreewillPosts from "./components/Posts/Freewill";
+import UpdateEthic from "./components/Posts/EditEthics";
+import Interfaces from './components/Interfaces'
+import editEthicsProps from './components/Posts/EditEthics'
+
 
 
 export interface TopicsState {
@@ -162,6 +161,11 @@ type Tokens =
 {
     sessionToken: string; 
     role: string
+    
+    updateEthPost: {[key: string]: any}
+    open: boolean
+
+
 }
 
 type fetchProps = {
@@ -171,15 +175,17 @@ type fetchProps = {
 
 
 
-
-
 class App extends Component<{}, Tokens, fetchProps > {
     
     constructor(props: {} ){
         super(props); 
         this.state = { 
             sessionToken: '', 
-            role: '' 
+            role: '', 
+         
+    updateEthPost: {},
+    open: true,
+    // updateEnd: () => () void, 
         };
     }
     
@@ -237,28 +243,15 @@ render () {
       role={this.state.role}
       updateRole={this.updateRole}/>}/>
         
-        <Route path ='/topics' element = {<Topics 
-        sessionToken={this.state.sessionToken}
-     />} /> 
-          
-          <Route path ='/topics/list' element = {<Topicslist />} />
+        
+       
 
-          <Route path = '/post/reality' element = {<RealityPosts
-            token={this.state.sessionToken}
-
-          />} />
-
-            <Route path = '/post/ethics' element = {<EthicPosts
-            token={this.state.sessionToken}
-
-          />} />
-
-<Route path = '/post/freewill' element = {<FreewillPosts
-            token={this.state.sessionToken}
-
-          />} />
-
-
+<Route path='/post/update/ethic' element ={<UpdateEthic 
+ token={this.state.sessionToken}
+ updateEthPost= {{'' : ''}}
+ open= {true} /> }/>
+            
+            
      
     
     
