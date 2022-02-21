@@ -6,7 +6,10 @@ import Login from "../src/components/Login";
 import Register from "../src/components/Register";
 import Topics from "../src/components/Topics"; 
 import Topicslist from "./components/Topicslist";
-import NotTS from './components/NotTS'
+import RealityPosts from "./components/Posts/Reality";
+import EthicPosts from "./components/Posts/Ethics";
+import FreewillPosts from "./components/Posts/Freewill";
+
 
 export interface TopicsState {
  
@@ -238,11 +241,24 @@ render () {
         sessionToken={this.state.sessionToken}
      />} /> 
           
-          <Route path ='/topics/list' element = {<Topicslist 
-      
-     />} />
+          <Route path ='/topics/list' element = {<Topicslist />} />
 
-     <Route path = '/notts' element = {<NotTS />}/>
+          <Route path = '/post/reality' element = {<RealityPosts
+            token={this.state.sessionToken}
+
+          />} />
+
+            <Route path = '/post/ethics' element = {<EthicPosts
+            token={this.state.sessionToken}
+
+          />} />
+
+<Route path = '/post/freewill' element = {<FreewillPosts
+            token={this.state.sessionToken}
+
+          />} />
+
+
      
     
     

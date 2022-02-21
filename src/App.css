@@ -25,6 +25,11 @@
 .Font {
  font-family: 'Gabriela', serif;
 }
+.Font2 {
+  font-family: 'Gabriela', serif;
+  position: fixed; 
+  align-items: left ;
+ }
 
 .Login {
   background-color: #282c34;
@@ -49,9 +54,14 @@
 }
 
 
-.btn {
+.Btn {
   background-color:#64b5f6; 
   color: #282c34; 
+  border: 1px solid gainsboro; 
+  border-radius: .5em; 
+  margin-left: auto; 
+  margin-right: auto; 
+  height: 30px; 
 }
 
 .Register {
@@ -67,6 +77,8 @@
   width: 600px;
   font-family: 'Gabriela', serif;
   color:#64b5f6;
+  
+  
   
 }
 
@@ -88,39 +100,47 @@
 
 .Topicslist {
   background-color: #282c34;
-  border: 2px solid #d3d3d3;
+  border: .5px solid #d3d3d3;
   border-radius: .5em;
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
+  margin-top: 35px;
   padding: 1em;
   text-align: left;
-  width: 300px;
+  width: 900px;
+
   
   font-family: 'Gabriela', serif;
   color:#64b5f6;
   align-items: center;
   font-size: 15px;
-  align-items: center;
+
   
 }
-.Topicslisted {
-  background-color: #81a6ee;
-  border: 2px solid #242424;
+
+
+.Postbox {
+  background-color: #e2e6ec;
+  border: 1px solid #d3d3d3;
   border-radius: .5em;
-  margin-bottom: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
+  margin-top: 80px;
+  margin-bottom: 10px;
   padding: 1em;
   text-align: left;
-  width: 250px;
+  width: 860px;
+  height: 300px;
+  font-family: 'Gabriela', serif;
+  color:#138bec;
+
+  
+}
+
+.Reality{ 
+
   font-family: 'Gabriela', serif;
   color:#64b5f6;
   align-items: center;
-  font-size: 15px;
-  align-items: center;
-  display: flex;
-  
+  margin-top: 500px;
+
 }

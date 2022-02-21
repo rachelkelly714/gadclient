@@ -4,31 +4,17 @@ const Topicslist: React.FunctionComponent = () => {
   const [selectedOption, setSelectedOption] = useState<String>();
 
   // This function is triggered when the select changes
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.target;
-    setSelectedOption();
+  const ButtonClickHandler = (event: React.MouseEvent<HTMLElement>) => {
+    
+    setSelectedOption('value');
   };
-  const styles: { [name: string]: React.CSSProperties } = {
-    container: {
-      marginTop: 50,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    select: {
-      padding: 5,
-      width: 200,
-    },
-    result: {
-      marginTop: 30,
-    },
-  };
+  
 
   return (
       <div className= 'Topicslist'>
         <h1>Select a Topic</h1>
       <div className='Topicslisted'>
-      <select onClick={handleSubmit} style={styles.select}>
+      <select onClick={ButtonClickHandler}>
         <option selected disabled>
           Choose one
         </option>
