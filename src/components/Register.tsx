@@ -1,4 +1,4 @@
-import { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 
 
 import {
@@ -12,7 +12,7 @@ import {
   Input,
   FormText,
 } from "reactstrap";
-import Datab from "../helpers/DB";
+import datab from "../helpers/DB";
 import {
   Flytoken,
   Usercred,
@@ -22,23 +22,30 @@ import {
   SetPropsUser,
 } from "./Interfaces";
 
-type Propslogin = {
+const [passwordValid, setPasswordValid]= React.useState<boolean>(true); 
+const [passwordError, setPasswordError] =
+		React.useState<string>("");
+type propsReg = {
   token: string;
   updateToken: (newToken: string) => void;
   role: string;
   updateRole: (newRole: string) => void;
 };
 
-type Varlogin = {
+type varReg = {
   username: string;
   password: string;
   emailAddress: string;
-  usernameValid: boolean; 
-  passwordValid: boolean;  
+  passwordValid: boolean;
+  passwordVerify: boolean; 
+  passwordConfirm: React.useState<string>('')
+  isPasswordConfirm: boolean;
+  passwordConfirmError: string
+  loginGo: React.useState<string>('')
 };
 
-class Register extends Component<Propslogin, Varlogin> {
-  constructor(props: Propslogin) {
+class Register extends Component<propsReg, varReg> {
+  constructor(props: propsReg) {
     super(props);
     this.state = {
       username: "",
@@ -46,13 +53,19 @@ class Register extends Component<Propslogin, Varlogin> {
       emailAddress: "",
       usernameValid: true, 
       passwordValid: true, 
+      passwordVerify: true,
+      passwordConfirm: React.useState<string>('')
+      isPasswordConfirm: true,
+      passwordConfirmError: ""
+      loginGo: React.useState<string>('')
+
      
     };
   }
 
-  handleSubmit = (e: React.FormEvent) => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    fetch(`${Datab}/user/register`, {
+    fetch(`${datab}/user/register`, {
       method: "Post",
       body: JSON.stringify({
         user: {
@@ -75,8 +88,29 @@ class Register extends Component<Propslogin, Varlogin> {
       });
   };
 
+ handleChange= (e: React.ChangeEvent<HTMLInputElement>): void => {
+     if (event.target.id ==== 'password') {
+       setPassword(event.target.value);
+     } else if (event.target.id === 'username'){
+       setLoginGo(event.target.value);
+      
+     }else { console.log('Error: ID Not found')}
 
+     
+    }
 
+    const passwordValid = () =>
+    if (password.length < 8 ) {
+       setPasswordValid(false)
+       setPasswordError('Your password must be at least 8 characters.')
+       return['Your password must be at least 8 characters.', false];
+    }
+
+    const passwordVerify = () => 
+    if (password !== passwordConfirm ){
+      setIsPasswordConfirm(false)
+      setPasswordConfirmError('Passwords do not match.')
+    }
 
 
 

@@ -5,6 +5,7 @@ import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
 import Register from "../src/components/Register";
 import Navbar from '../src/components/Navbar'
+import FreewillPosts from "./components/Posts/Freewill";
 
 
 // import Interfaces from './components/Interfaces'
@@ -224,17 +225,27 @@ class App extends Component<{}, Tokens, fetchProps > {
 
 render () {
     return (
-    <>
+  
     <div className= 'App'>
-  <Routes>
-       <Route path='/navbar' element = {<Navbar
-   token={this.state.sessionToken}
-   userRole={this.state.role}/>}/> </Routes>
+
+
+
+<Routes>
+
+
+
+
 
 
 
    <div><h1 className= 'Font'>Welcome!</h1></div>
-    <Routes>
+ 
+       <Route path='/' element = {<Navbar
+   token={this.state.sessionToken}
+   userRole={this.state.role}/>}/> 
+
+   
+   
     <Route path='/users/login' element = {<Login  
       token={this.state.sessionToken}
       updateToken = {this.updateToken}
@@ -248,21 +259,13 @@ render () {
       updateRole={this.updateRole}/>}/>
 
       
-        
-
-
-            
-            
-     
-    
-    
-    
+      
     </Routes>
     
     
     </div>
 
-</>
+
 
     )}
 

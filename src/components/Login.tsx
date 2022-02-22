@@ -1,4 +1,4 @@
-import { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 
 
 import {
@@ -12,7 +12,7 @@ import {
   Input,
   FormText,
 } from "reactstrap";
-import Datab from "../helpers/DB";
+import datab from "../helpers/DB";
 import {
   Flytoken,
   Usercred,
@@ -22,14 +22,14 @@ import {
   SetPropsUser,
 } from "./Interfaces";
 
-type Propslogin = {
+type propsLogin = {
   token: string;
   updateToken: (newToken: string) => void;
   role: string;
   updateRole: (newRole: string) => void;
 };
 
-type Varlogin = {
+type varLogin = {
   username: string;
   password: string;
   emailAddress: string;
@@ -37,8 +37,8 @@ type Varlogin = {
   passwordValid: boolean;  
 };
 
-class Login extends Component<Propslogin, Varlogin> {
-  constructor(props: Propslogin) {
+class Login extends Component<propsLogin, varLogin> {
+  constructor(props: propsLogin) {
     super(props);
     this.state = {
       username: "",
@@ -50,16 +50,16 @@ class Login extends Component<Propslogin, Varlogin> {
     };
   }
 
-  handleSubmit = (e: React.FormEvent) => {
+  handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    fetch(`${Datab}/user/login`, {
+    fetch(`${datab}/user/login`, {
       method: "Post",
       body: JSON.stringify({
-        user: {
+        
           username: this.state.username,
-          password: this.state.password,
           emailAddress: this.state.emailAddress,
-        },
+          password: this.state.password,
+        
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -72,9 +72,16 @@ class Login extends Component<Propslogin, Varlogin> {
       })
       .catch((err) => {
         console.log("Error: 500 ISE", err);
-      });
+      })
+   
   };
 
+handleChange= (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const target = e.target;
+  const value = target.value;
+  const name = target.name;
+  this.setState({ [name]: value } as unknown as Pick<varLogin, keyof varLogin>) }
+    
 
 
 
@@ -85,7 +92,7 @@ class Login extends Component<Propslogin, Varlogin> {
       <div>  
         <div className="Login">
         <h2>Sign In</h2>
-        <Form className="form">
+        <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup>
             
             <Label for="exampleEmail">Username</Label>
@@ -99,13 +106,16 @@ class Login extends Component<Propslogin, Varlogin> {
           <FormGroup>
             <Label for="examplePassword">Password</Label>
             <Input
+              
               type="password"
               name="password"
-              id="examplePassword"
+              id="password"
               placeholder="********"
+              onChange={this.handleChange}
             />
           </FormGroup>
-        <Button style={{ backgroundColor:'#64b5f6'}}>Submit</Button>
+        <Button style={{ backgroundColor:'#64b5f6'}
+    } type='submit'>Submit</Button>
       </Form>
     </div>
        
