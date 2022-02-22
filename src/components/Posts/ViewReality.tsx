@@ -2,7 +2,6 @@ import  { Component } from 'react'
 import PostRLCard from './RLPostCard'
 import RealityPosts from './Reality'
 import UpdateReality, { editRealProps } from './EditReality'
-import UpdateFW from './EditFW'
 import datab from '../../helpers/DB'
 
 type viewRLProps = {
