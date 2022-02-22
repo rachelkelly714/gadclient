@@ -6,7 +6,7 @@ import background from "../../assets/freewill.jpg";
 
 type fwillProps = {
   token: string;
-  // fetchPost: () =>Promise<any>
+  fetchPost: () =>Promise<any>
 };
 
 export interface FwillState {

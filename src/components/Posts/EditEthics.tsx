@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Datab from '../../helpers/DB';
-import {EthicState} from './Ethics';
+import { EthicState } from './Ethics';
+import { RealityState } from './Reality';
+import { FwillState } from './Freewill';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 import datab from '../../helpers/DB';
 import {Button} from 'reactstrap'
@@ -10,13 +12,13 @@ import {Button} from 'reactstrap'
 
 export interface editEthicsProps  {
     token: string
-    fetchPost: () => Promise<'string'>
+    fetchPost: () => Promise<any>
     updateEthPost: {[key: string]: any}
     open: boolean
     updateEnd: () => void
 }
 
-export interface UpdateEthicState extends EthicState {
+export interface UpdateEthicState extends EthicState, RealityState, FwillState  {
     isModalOpen: boolean
 }
 
@@ -98,7 +100,7 @@ class UpdateEthic extends Component<editEthicsProps, UpdateEthicState> {
                 this.modalToggle();
               }}
             >
-              Edit
+              Save
             </Button>
             <Button style={{ backgroundColor: "#64b5f6", alignItems: "center", font: 'Gabriela, serif' }}
              

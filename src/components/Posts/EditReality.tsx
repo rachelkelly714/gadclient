@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import Datab from '../../helpers/DB';
 import {RealityState} from './Reality';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
 import datab from '../../helpers/DB';
 
 
@@ -31,7 +30,7 @@ class UpdateReality extends Component<editRealProps, UpdateRealState> {
     };
   }
 
-  editEthicPost = async (id: number) => {
+  editRealPost = async (id: number) => {
     try {
       const res = await fetch(`${datab}/post/${this.props.updateRealPost.id}`, {
         method: "PUT",
@@ -87,7 +86,7 @@ class UpdateReality extends Component<editRealProps, UpdateRealState> {
               </label>
             </div>
             
-            <div className="flex flex-col">
+            <div>
               <label htmlFor="postEntry">
                 <textarea
                   id="postEntry"
@@ -103,21 +102,21 @@ class UpdateReality extends Component<editRealProps, UpdateRealState> {
             </div>
           </ModalBody>
           <ModalFooter className='ModalHed'>
-            <button
-              className= 'Btn'
+          <Button
+              style={{ backgroundColor: "#64b5f6", alignItems: "center" }}
               onClick={(id: any) => {
-                this.editEthicPost(id);
+                this.editRealPost(id);
                 this.modalToggle();
               }}
             >
-              Edit
-            </button>
-            <button className='Btn'
+              Save
+            </Button>
+            <Button style={{ backgroundColor: "#64b5f6", alignItems: "center", font: 'Gabriela, serif' }}
              
               onClick={this.modalToggle}
             >
               Nevermind
-            </button>
+            </Button>
           </ModalFooter>
         </Modal>
       </div>

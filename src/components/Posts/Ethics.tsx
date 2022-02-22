@@ -5,12 +5,12 @@ import { Form, FormGroup, Button, Input } from "reactstrap";
 import background from "../../assets/ethical.jpg";
 import {Route, Routes} from 'react-router-dom'; 
 import UpdateEthic from './EditEthics'
-import {editEthicsProps} from './EditEthics'
-import { updateEnumDeclaration } from "typescript";
+
+
 
 type ethicProps = {
   token: string;
-  // fetchPost: () =>Promise<any>
+  fetchPost: () =>Promise<any>
 };
 
 export interface EthicState {

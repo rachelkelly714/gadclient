@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Datab from '../../helpers/DB';
 import {FwillState} from './Freewill';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
 import datab from '../../helpers/DB';
 
 
@@ -31,7 +31,7 @@ class UpdateFW extends Component<editFWProps, UpdateFWState> {
     };
   }
 
-  editEthicPost = async (id: number) => {
+  editFWPost = async (id: number) => {
     try {
       const res = await fetch(`${datab}/post/${this.props.updateFWPost.id}`, {
         method: "PUT",
@@ -103,21 +103,21 @@ class UpdateFW extends Component<editFWProps, UpdateFWState> {
             </div>
           </ModalBody>
           <ModalFooter className='ModalHed'>
-            <button
-              className= 'Btn'
+          <Button
+              style={{ backgroundColor: "#64b5f6", alignItems: "center" }}
               onClick={(id: any) => {
-                this.editEthicPost(id);
+                this.editFWPost(id);
                 this.modalToggle();
               }}
             >
-              Edit
-            </button>
-            <button className='Btn'
+              Save
+            </Button>
+            <Button style={{ backgroundColor: "#64b5f6", alignItems: "center", font: 'Gabriela, serif' }}
              
               onClick={this.modalToggle}
             >
               Nevermind
-            </button>
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -126,4 +126,4 @@ class UpdateFW extends Component<editFWProps, UpdateFWState> {
 }
 
 
-export default UpdateReality
+export default UpdateFW

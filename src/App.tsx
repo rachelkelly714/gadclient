@@ -4,9 +4,11 @@ import "./App.css";
 import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
 import Register from "../src/components/Register";
-import UpdateEthic from "./components/Posts/EditEthics";
-import Interfaces from './components/Interfaces'
-import editEthicsProps from './components/Posts/EditEthics'
+import PostETCard from "../src/components/Posts/ETPostCard"
+
+
+// import Interfaces from './components/Interfaces'
+
 
 
 
@@ -161,9 +163,6 @@ type Tokens =
 {
     sessionToken: string; 
     role: string
-    
-    updateEthPost: {[key: string]: any}
-    open: boolean
 
 
 }
@@ -183,9 +182,7 @@ class App extends Component<{}, Tokens, fetchProps > {
             sessionToken: '', 
             role: '', 
          
-    updateEthPost: {},
-    open: true,
-    // updateEnd: () => () void, 
+   
         };
     }
     
@@ -243,13 +240,8 @@ render () {
       role={this.state.role}
       updateRole={this.updateRole}/>}/>
         
-        
-       
+ 
 
-<Route path='/post/update/ethic' element ={<UpdateEthic 
- token={this.state.sessionToken}
- updateEthPost= {{'' : ''}}
- open= {true} /> }/>
             
             
      

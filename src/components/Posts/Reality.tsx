@@ -6,7 +6,7 @@ import background from "../../assets/reality.png";
 
 type realProps = {
   token: string;
-  // fetchPost: () =>Promise<any>
+  fetchPost: () =>Promise<any>
 };
 
 export interface RealityState {
