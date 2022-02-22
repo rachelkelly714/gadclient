@@ -4,7 +4,7 @@ import "./App.css";
 import {  Router, Route, Routes,  } from "react-router-dom";
 import Login from "../src/components/Login";
 import Register from "../src/components/Register";
-import PostETCard from "../src/components/Posts/ETPostCard"
+import Navbar from '../src/components/Navbar'
 
 
 // import Interfaces from './components/Interfaces'
@@ -225,7 +225,14 @@ class App extends Component<{}, Tokens, fetchProps > {
 render () {
     return (
     <>
-    <div className= 'App'> 
+    <div className= 'App'>
+  <Routes>
+       <Route path='/navbar' element = {<Navbar
+   token={this.state.sessionToken}
+   userRole={this.state.role}/>}/> </Routes>
+
+
+
    <div><h1 className= 'Font'>Welcome!</h1></div>
     <Routes>
     <Route path='/users/login' element = {<Login  
@@ -239,8 +246,10 @@ render () {
       updateToken = {this.updateToken}
       role={this.state.role}
       updateRole={this.updateRole}/>}/>
+
+      
         
- 
+
 
             
             
