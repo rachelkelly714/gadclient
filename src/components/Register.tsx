@@ -1,165 +1,172 @@
-import React, { Component, useState, useEffect } from "react";
+import  React, { Component, useState } from 'react'; 
 
+import { Form, Button, FormGroup, Label, Input, Alert } from 'reactstrap';
+import APIURL from '../helpers/DB';
 
-import {
-  Form,
-  Container,
-  Row,
-  Col,
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-} from "reactstrap";
-import datab from "../helpers/DB";
-import {
-  Flytoken,
-  Usercred,
-  Admincred,
-  Admintoken,
-  Serverfetch,
-  SetPropsUser,
-} from "./Interfaces";
-
-const [passwordValid, setPasswordValid]= React.useState<boolean>(true); 
-const [passwordError, setPasswordError] =
-		React.useState<string>("");
 type propsReg = {
-  token: string;
-  updateToken: (newToken: string) => void;
-  role: string;
-  updateRole: (newRole: string) => void;
+ 
+    updateToken: (newToken: string) => void;
+    token: string | null
+
+
 };
 
-type varReg = {
-  username: string;
-  password: string;
-  emailAddress: string;
-  passwordValid: boolean;
-  passwordVerify: boolean; 
-  passwordConfirm: React.useState<string>('')
-  isPasswordConfirm: boolean;
-  passwordConfirmError: string
-  loginGo: React.useState<string>('')
+type VarReg = {
+    email: string;
+    emailValid: boolean;
+    emailTyping: boolean;
+    password: string;
+    passwordValid: boolean;
+    passwordTyping: boolean;
+    passwordConfirm: string;
+    isPasswordConfirm: boolean;
+    passwordConfirmTyping: boolean; 
+    passwordConfirmError: string;
+    errors: string
+    alert: string 
+    alertCheck: boolean
 };
 
-class Register extends Component<propsReg, varReg> {
-  constructor(props: propsReg) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      emailAddress: "",
-      usernameValid: true, 
-      passwordValid: true, 
-      passwordVerify: true,
-      passwordConfirm: React.useState<string>('')
-      isPasswordConfirm: true,
-      passwordConfirmError: ""
-      loginGo: React.useState<string>('')
-
+class Register extends Component<propsReg, VarReg> {
+    constructor(props: propsReg) {
+        super(props);
+        this.state = {
+            email: '',
+            emailValid: false,
+            emailTyping: false,
+            password: '',
+            passwordValid: false,
+            passwordTyping: false,
+            passwordConfirm: '',
+            passwordConfirmTyping: false, 
+            isPasswordConfirm: false,
+            passwordConfirmError: '',
+            errors: '',
+            alert: '',
+            alertCheck: false, 
+        };
+    }
      
-    };
-  }
 
-  handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    fetch(`${datab}/user/register`, {
-      method: "Post",
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          password: this.state.password,
-          emailAddress: this.state.emailAddress,
-        },
+
+     passwordValidate = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?'_]).*$/
+
+
+
+  
+
+    passwordCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!this.state.passwordTyping)
+            this.setState({ passwordTyping: true })
+        this.setState({ password: event.target.value },
+            () => {
+                if (this.passwordValidate.test(this.state.password))
+                    this.setState({ passwordValid: true, errors: '' })
+                else
+                    this.setState({ passwordValid: false, errors: 'Password must be at least 8 characters long, under 16 characters, and include a number and a symbol. ' })
+            })
+    }
+    passwordVerify = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!this.state.passwordConfirmTyping)
+            this.setState({passwordConfirmTyping: true })
+        this.setState({ passwordConfirm: event.target.value },
+            () => {
+                if (this.state.password === this.state.passwordConfirm)
+                    this.setState({ isPasswordConfirm: true, errors: '' })
+                else
+                    this.setState({ isPasswordConfirm: false, errors: 'Passwords must match' })
+            })
+    }
+
+
+
+
+    
+  handleRegSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+   await fetch(`${APIURL}/user/register`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({ 
+        user:{
+        email: this.state.email,
+        password: this.state.password,
+      }
       }),
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
+    }).then((result) => {
+        result.status === 201 ? this.setState({alertCheck: true}) : this.setState({ alertCheck: false})
+        return result
     })
-      .then((res) => res.json())
-      .then((data) => {
-        this.props.updateToken(data.sessionToken);
-        this.props.updateRole(data.user.role);
+      .then(result => result.json())
+      .then(result => {
+        this.props.updateToken(result.sessionToken)
+        this.setState({alert: result.message})
       })
-      .catch((err) => {
-        console.log("Error: 500 ISE", err);
-      });
-  };
-
- handleChange= (e: React.ChangeEvent<HTMLInputElement>): void => {
-     if (event.target.id ==== 'password') {
-       setPassword(event.target.value);
-     } else if (event.target.id === 'username'){
-       setLoginGo(event.target.value);
-      
-     }else { console.log('Error: ID Not found')}
-
-     
-    }
-
-    const passwordValid = () =>
-    if (password.length < 8 ) {
-       setPasswordValid(false)
-       setPasswordError('Your password must be at least 8 characters.')
-       return['Your password must be at least 8 characters.', false];
-    }
-
-    const passwordVerify = () => 
-    if (password !== passwordConfirm ){
-      setIsPasswordConfirm(false)
-      setPasswordConfirmError('Passwords do not match.')
-    }
-
-
-
-  render() {
-    return (
-      <div>  
-        <div className="Register">
-        <h2>Sign Up!</h2>
-        <Form className="form">
-          <FormGroup>
-            
-            <Label for="exampleEmail">Username</Label>
-            <Input
-              type="email"
-              name="email"
-              id="exampleEmail"
-              placeholder="example@example.com"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="********"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword"> Verify Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="********"
-            />
-          </FormGroup>
-        <Button style={{ backgroundColor:'#64b5f6'}}>Submit</Button>
-      </Form>
-    </div>
-       
-      </div>
-    );
   }
+
+
+
+
+
+    render() {
+        return (
+            <div>
+                <div className="Register">
+                    <h2>Sign Up!</h2>
+                    <Form
+          onSubmit={this.handleRegSubmit} className="form">
+                        <FormGroup
+                      >      
+                            <Label for="Email">Email Address</Label>
+                            <Input 
+                            type="email"
+                            // vaule={this.state.email}
+                            name="email" 
+                            id="email" 
+                            placeholder="Email Address" 
+                            autoComplete="email" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="Password">Password</Label>
+                            <Input 
+                            type="password" 
+                            name="password" 
+                            value={this.state.password}
+                            onChange={this.passwordCheck}
+                            error={this.state.errors}
+                            id="password" 
+                            placeholder="********" 
+                            autoComplete="new-password" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="Password"> Verify Password</Label>
+                            <Input 
+                            type="password" 
+                            name="password"
+                            value={this.state.passwordConfirm}
+                            onChange={this.passwordVerify} 
+                            error={this.state.errors}
+                            id="password" 
+                            placeholder="********" />
+                        </FormGroup>
+                        <Button 
+                        type="submit" 
+                        style={{ backgroundColor: '#64b5f6' }}
+                         >
+                            Submit
+                        </Button>
+                    </Form>
+                  
+                </div>
+                {this.state.alert && <Alert color={this.state.alertCheck ? 'success' : 'danger'}>{this.state.alert}</Alert>}
+            </div>
+         
+        );
+    }
 }
- 
-
-
-
 
 
 export default Register;

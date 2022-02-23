@@ -4,8 +4,8 @@ import moment from 'moment';
 import 'moment-timezone';
 import {Button} from 'reactstrap'
 
-// import '../Views/BlogCard.css'
-import datab from '../../helpers/DB'
+
+import APIURL from '../../helpers/DB'
 
 type cardETProps = {
   token: string
@@ -25,15 +25,15 @@ export class PostETCard extends Component<cardETProps, ETCardState> {
     this.state = {
       id: Infinity,
       post: [],
+      textBox: '',
       date: '',
       topicTitle: '',
-      postEntry: '',
     }
   }
 
   deleteETPost = async (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault()
-    await fetch(`${datab}/post/ethics/${id}`, {
+    await fetch(`${APIURL}/post/ethics/${id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export class PostETCard extends Component<cardETProps, ETCardState> {
                     {post.topicTitle}
                   </p>
                   <p >
-                    {post.entry}
+                    {post.textBox}
                     <div >
                       <Button
                        style={{backgroundColor: '#64b5f6', font: 'Gabriela, serif' }}
@@ -88,7 +88,7 @@ export class PostETCard extends Component<cardETProps, ETCardState> {
           </>
         ) : (
           <>
-            <h3 style={{font: 'Gabriela, serif'}}>For Justice! (whatever that is...)</h3>
+            <h3 style={{font: 'Gabriela, serif', color: 'black'}}>For Justice! (whatever that is...)</h3>
           </>
         )}
       </div>

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import datab from "../../helpers/DB";
+import APIURL from "../../helpers/DB";
 import "../../App.css";
 import { Form, FormGroup, Button, Input } from "reactstrap";
 import background from "../../assets/reality.png";
 
 type realProps = {
   token: string;
-  fetchPost: () =>Promise<any>
+  fetchPost: any
 };
 
 export interface RealityState {
-  post: Array<object>;
-  topicTitle: string;
+  post: Array<object>
+  textBox: string;
   date: string;
-  postEntry: string;
+  topicTitle: string;
 }
 
 class RealityPosts extends Component<realProps, RealityState> {
@@ -21,21 +21,25 @@ class RealityPosts extends Component<realProps, RealityState> {
     super(props);
     this.state = {
       post: [],
-      topicTitle: "",
+      textBox: '',
       date: new Date().toLocaleString(),
-      postEntry: "",
+      topicTitle: "",
+      
     };
   }
+
+  
 
   newPost = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const res = await fetch(`${datab}/posts`, {
+      const res = await fetch(`${APIURL}/posts/reality`, {
         method: "POST",
+        mode: "cors",
         body: JSON.stringify({
-          topic: this.state.topicTitle,
+          textBox: this.state.textBox,
           date: this.state.date,
-          postEntry: this.state.postEntry,
+          topicTitle: this.state.topicTitle,
         }),
         headers: new Headers({
           "Content-Type": "application/json",
@@ -44,9 +48,9 @@ class RealityPosts extends Component<realProps, RealityState> {
       });
       await res.json();
       this.setState({
-        topicTitle: "",
+        textBox: "",
         date: "",
-        postEntry: "",
+        topicTitle: "",
       });
     } catch (err) {
       console.log(err);
@@ -85,9 +89,9 @@ class RealityPosts extends Component<realProps, RealityState> {
                 <textarea
                   id="entry"
                   className="Postbox"
-                  value={this.state.postEntry}
+                  value={this.state.textBox}
                   placeholder="What's up?"
-                  onChange={(e) => this.setState({ postEntry: e.target.value })}
+                  onChange={(e) => this.setState({ textBox: e.target.value })}
                 />
               </label>
             </FormGroup>

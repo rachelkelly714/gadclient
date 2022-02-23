@@ -3,7 +3,7 @@ import RealityPosts, { RealityState } from './Reality';
 import moment from 'moment';
 import 'moment-timezone';
 import {Button} from 'reactstrap'
-import datab from '../../helpers/DB'
+import APIURL from '../../helpers/DB'
 
 type cardRLProps = {
   token: string
@@ -23,15 +23,15 @@ export class PostRLCard extends Component<cardRLProps, RLCardState> {
     this.state = {
       id: Infinity,
       post: [],
+      textBox: '',
       date: '',
       topicTitle: '',
-      postEntry: '',
     }
   }
 
   deleteRLPost = async (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     e.preventDefault()
-    await fetch(`${datab}/post/reality/${id}`, {
+    await fetch(`${APIURL}/post/reality/${id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -42,8 +42,8 @@ export class PostRLCard extends Component<cardRLProps, RLCardState> {
   }
 
   render() {
-      let dateFormat = 'MM/DD/YYYY'
-      return (
+    let dateFormat = 'MM/DD/YYYY'
+    return (
       <div>
         {this.props.postData.length > 0 ? (
           <>

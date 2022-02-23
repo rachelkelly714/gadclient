@@ -1,8 +1,8 @@
-let datab: string; 
+let APIURL: string; 
 
-datab = "http://localhost:5005"; 
-
-
+APIURL = "http://localhost:5005"; 
 
 
-export default datab; 
+
+
+export default APIURL; 

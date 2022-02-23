@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import datab from "../../helpers/DB";
+import APIURL from "../../helpers/DB";
 import "../../App.css";
 import { Form, FormGroup, Button, Input } from "reactstrap";
 import background from "../../assets/ethical.jpg";
-import {Route, Routes} from 'react-router-dom'; 
 import UpdateEthic from './EditEthics'
 
 
@@ -15,9 +14,9 @@ type ethicProps = {
 
 export interface EthicState {
   post: Array<object>;
+  textBox: string;
   topicTitle: string;
   date: string;
-  postEntry: string;
 }
 
 
@@ -26,21 +25,21 @@ export interface EthicState {
     super(props);
     this.state = {
       post: [],
+      textBox: "",
       topicTitle: "",
       date: new Date().toLocaleString(),
-      postEntry: "",
     };
   }
 
   newPost = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const res = await fetch(`${datab}/posts`, {
+      const res = await fetch(`${APIURL}/posts`, {
         method: "POST",
         body: JSON.stringify({
+          textBox: this.state.textBox,
           topic: this.state.topicTitle,
           date: this.state.date,
-          postEntry: this.state.postEntry,
         }),
         headers: new Headers({
           "Content-Type": "application/json",
@@ -49,9 +48,9 @@ export interface EthicState {
       });
       await res.json();
       this.setState({
+        textBox: "",
         topicTitle: "",
         date: "",
-        postEntry: "",
       });
     } catch (err) {
       console.log(err);
@@ -90,9 +89,9 @@ export interface EthicState {
                 <textarea
                   id="entry"
                   className="Postbox"
-                  value={this.state.postEntry}
+                  value={this.state.textBox}
                   placeholder="What's up?"
-                  onChange={(e) => this.setState({ postEntry: e.target.value })}
+                  onChange={(e) => this.setState({ textBox: e.target.value })}
                 />
               </label>
             </FormGroup>

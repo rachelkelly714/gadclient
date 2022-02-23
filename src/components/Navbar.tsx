@@ -13,20 +13,22 @@ import {
 } from 'reactstrap'
 import Logo from '../assets/gadflylogo2.png'
 
-type navProps = {
+type NavProps = {
   token: string
 //   logout: () => void 
-  userRole: string
+
 }
 
-type navTog = {
+type NavTog = {
   isOpen: boolean
+ 
 }
-export default class Sitebar extends Component<navProps, navTog> {
-  constructor(props: navProps) {
+export default class Sitebar extends Component<NavProps, NavTog> {
+  constructor(props: NavProps) {
     super(props)
     this.state = {
       isOpen: false,
+ 
     }
   }
 
@@ -42,13 +44,7 @@ export default class Sitebar extends Component<navProps, navTog> {
     // )
     )}
 
-  adminNav = () => {
-    return this.props.userRole === 'Socrates' ? (
-      <Button>Admin Page</Button>
-    ) : (
-      <></>
-    )
-  }
+  
 
   render() {
     return (
@@ -90,13 +86,7 @@ export default class Sitebar extends Component<navProps, navTog> {
                   </Link>
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink>
-                  <Link to='/admin'>
-                    {this.adminNav()}
-                  </Link>
-                </NavLink>
-              </NavItem>
+             
             </Nav>
             <NavbarText>{this.logoutBtn()}</NavbarText>
           </Collapse>

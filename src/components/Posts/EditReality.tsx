@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {RealityState} from './Reality';
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
-import datab from '../../helpers/DB';
+import APIURL from '../../helpers/DB';
 
 
 
 
-export interface editRealProps  {
+type editRealProps =  {
     token: string
     fetchPost: () => Promise<'string'>
     updateRealPost: {[key: string]: any}
@@ -24,24 +24,26 @@ class UpdateReality extends Component<editRealProps, UpdateRealState> {
     this.state = {
       isModalOpen: true,
       post: [],
-      topicTitle: this.props.updateRealPost.topicTitle,
+      textBox: this.props.updateRealPost.textBox,
       date: this.props.updateRealPost.date,
-      postEntry: this.props.updateRealPost.postEntry,
+      topicTitle: this.props.updateRealPost.topicTitle,
+      
+     
     };
   }
 
   editRealPost = async (id: number) => {
     try {
-      const res = await fetch(`${datab}/post/${this.props.updateRealPost.id}`, {
+      const res = await fetch(`${APIURL}/post/${this.props.updateRealPost.id}`, {
         method: "PUT",
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization: `Bearer ${this.props.token}`,
         }),
         body: JSON.stringify({
-          topicTitle: this.state.topicTitle,
+          textBox: this.state.textBox,
           date: this.state.date,
-          postEntry: this.state.postEntry,
+          topicTitle: this.state.topicTitle,
         }),
       });
       await res.json();
@@ -87,16 +89,16 @@ class UpdateReality extends Component<editRealProps, UpdateRealState> {
             </div>
             
             <div>
-              <label htmlFor="postEntry">
+              <label htmlFor="textBox">
                 <textarea
-                  id="postEntry"
+                  id="textBox"
                   className = 'Modalbottbox'
          
                   
-                  value={this.state.postEntry}
+                  value={this.state.textBox}
                   name="entry"
                   placeholder="Post"
-                  onChange={(e) => this.setState({ postEntry: e.target.value })}
+                  onChange={(e) => this.setState({ textBox: e.target.value })}
                 />
               </label>
             </div>

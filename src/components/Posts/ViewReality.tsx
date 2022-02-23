@@ -1,14 +1,14 @@
 import  { Component } from 'react'
 import PostRLCard from './RLPostCard'
 import RealityPosts from './Reality'
-import UpdateReality, { editRealProps } from './EditReality'
-import datab from '../../helpers/DB'
+import UpdateReality from './EditReality'
+import APIURL from '../../helpers/DB'
 
 type viewRLProps = {
   token: string
 }
 
-interface RLIndexState {
+type RLIndexState = {
 
   postData: Array<object>
   updatePost: { [key: string]: string }
@@ -31,8 +31,9 @@ class ViewRL extends Component<viewRLProps, RLIndexState> {
   fetchPost = async () => {
     if (this.props.token) {
       try {
-        const response = await fetch(`${datab}/post/reality/my`, {
+        const response = await fetch(`${APIURL}/post/reality/my`, {
           method: 'GET',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${this.props.token}`,

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import Datab from '../../helpers/DB';
 import { EthicState } from './Ethics';
-import { RealityState } from './Reality';
-import { FwillState } from './Freewill';
 import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 import datab from '../../helpers/DB';
 import {Button} from 'reactstrap'
@@ -18,7 +16,7 @@ export interface editEthicsProps  {
     updateEnd: () => void
 }
 
-export interface UpdateEthicState extends EthicState, RealityState, FwillState  {
+export interface UpdateEthicState extends EthicState  {
     isModalOpen: boolean
 }
 
@@ -28,9 +26,9 @@ class UpdateEthic extends Component<editEthicsProps, UpdateEthicState> {
     this.state = {
       isModalOpen: true,
       post: [],
+      textBox: this.props.updateEthPost.textBox,
       topicTitle: this.props.updateEthPost.topicTitle,
       date: this.props.updateEthPost.date,
-      postEntry: this.props.updateEthPost.postEntry,
     };
   }
 
@@ -38,14 +36,15 @@ class UpdateEthic extends Component<editEthicsProps, UpdateEthicState> {
     try {
       const res = await fetch(`${datab}/post/${this.props.updateEthPost.id}`, {
         method: "PUT",
+        mode: 'cors',
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization: `Bearer ${this.props.token}`,
         }),
         body: JSON.stringify({
+          textBox: this.state.textBox,
           topicTitle: this.state.topicTitle,
           date: this.state.date,
-          postEntry: this.state.postEntry,
         }),
       });
       await res.json();
@@ -80,14 +79,14 @@ class UpdateEthic extends Component<editEthicsProps, UpdateEthicState> {
           <ModalBody className='ModalHed'>
             
             <div className="flex flex-col">
-              <label htmlFor="postEntry">
+              <label htmlFor="textBox">
                 <textarea
-                  id="postEntry"
+                  id="textBox"
                   className = 'Modalbottbox'
-                  value={this.state.postEntry}
-                  name="post"
+                  value={this.state.textBox}
+                  name="text"
                   
-                  onChange={(e) => this.setState({ postEntry: e.target.value })}
+                  onChange={(e) => this.setState({ textBox: e.target.value })}
                 />
               </label>
             </div>

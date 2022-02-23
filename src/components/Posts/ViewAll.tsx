@@ -3,9 +3,11 @@ import ViewRL from "./ViewReality";
 import ViewFW from "./ViewFW";
 import datab from "../../helpers/DB";
 import {Component} from 'react'
+import {Button, Col, FormGroup, Label,  Input, FormText, Form} from 'reactstrap'
 
 type allProps = {
     token: string
+  
 }
 
 interface AllState {
@@ -14,6 +16,7 @@ interface AllState {
     updatePost: { [key: string]: string }
     updateOpen: boolean
     open: boolean
+    username: string
 
 }
 
@@ -26,6 +29,7 @@ constructor(props: allProps) {
       open: true,
       updateOpen: false,
       updatePost: {},
+      username: ''
     }
 }
 fetchPost = async () => {
@@ -71,13 +75,80 @@ fetchPost = async () => {
   render() {
     return (
       <div>
-        <ViewEthics token={this.props.token} />
-        <ViewRL  token={this.props.token}/>
+
+<Form>
+  <FormGroup row>
+    <Label
+      for="username"
+      sm={2}
+    >
+      Name/Username
+    </Label>
+    <Col sm={10}>
+      <Input
+        id= "username"
+        name="username"
+        placeholder="What should we call you?"
+        type="text"
+      />
+    </Col>
+  </FormGroup>
+  
+ 
+  
+  <FormGroup row>
+    <Label
+      for="textbox"
+      sm={2}
+    >
+      Tell Us About Yoursef. 
+    </Label>
+    <Col sm={10}>
+      <Input
+        id="text"
+        name="text"
+        type="text"
+      />
+    </Col>
+  </FormGroup>
+ 
+  
+ 
+  <FormGroup
+ 
+    row
+  >
+    <Col
+      sm={{
+        offset: 2,
+        size: 10
+      }}
+    >
+      <Button>
+        Save
+      </Button>
+    </Col>
+  </FormGroup>
+</Form>
+
+<hr />
+<div className="lower-half">
+<p>Your Posts</p>
+
+<ViewEthics token={this.props.token} />
+<ViewRL token={this.props.token}/>
         <ViewFW token={this.props.token} />
-                
+     </div>   
+
+     </div>    
+     
+     
+
+
+
         )
-      </div>
-    )
+
+  }
   }
 
 
@@ -88,6 +159,6 @@ fetchPost = async () => {
 
 
 
-}
+
 
 export default ViewAll
